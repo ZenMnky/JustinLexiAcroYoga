@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -33,6 +35,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.title {
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  text-shadow: 1px 1px 2px black; 
 }
 
 .title a {
@@ -73,11 +81,18 @@
 
 .grid {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
   max-width: 800px;
   margin-top: 3rem;
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+}
+
+.grid img {
+  max-width: 100%;
 }
 
 .card {
@@ -90,6 +105,7 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
+  background-color: white;
 }
 
 .card:hover,
