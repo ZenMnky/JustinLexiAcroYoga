@@ -4,7 +4,7 @@ const YOUTUBE_PLAYLIST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/playli
 const PLAYLIST_ID = 'PLmmhgwbeGV3c3Eap2dLeX0KCvW-vEpa9B';
 
 export async function getServerSideProps() {
-  const res = await fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=50&playlistId=${PLAYLIST_ID}&key=${process.env.YOUTUBE_API_KEY}`);
+  const res = await fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=50&playlistId=${PLAYLIST_ID}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`);
   const data = await res.json();
   return {
     props: {
@@ -24,19 +24,26 @@ export default function Home({data}) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          JustinLexiAcro.Yoga
-        </h1>
-
+        <div className={styles.siteTitle}>
+          <h1 className={styles.title}>
+            JustinLexiAcro.Yoga
+          </h1>
+        </div>
+        
         <ul className={styles.grid}>
           {data.items.map(({ id, snippet = {} }) => {
             const { title, thumbnails = {}, resourceId = {} } = snippet;
             const { medium } = thumbnails;
             return (
               <li key={id} className={styles.card}>
-                <a href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}>
+                <a 
+                  href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
+                  target='_blank'
+                  rel='norefer'
+                >
                   <p>
-                    <img width={medium.width} height={medium.height} src={medium.url} alt="" />
+                    {/* <img width={medium.width} height={medium.height} src={medium.url} alt="" /> */}
+                    <img src={medium.url} alt="" />
                   </p>
                   <h3>{ title }</h3>
                 </a>

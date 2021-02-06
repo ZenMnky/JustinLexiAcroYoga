@@ -131,8 +131,29 @@
 }
 
 @media (max-width: 600px) {
+ 
   .grid {
-    width: 100%;
+    /* width: 100vw; */
     flex-direction: column;
+    justify-content: center;
+  }
+  .siteTitle h1{
+    margin: 0;
+    padding: 0;
+  }
+  .siteTitle {
+    width: 90vw;
+    
+   
   }
 }
+
+/* @media all and (min-width: 769px){
+  .container{
+    width: 80%;
+    margin: auto;
+  }
+  .title {
+    color: red;
+  }
+} */
