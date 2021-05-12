@@ -1,20 +1,24 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-const YOUTUBE_PLAYLIST_ITEMS_API = 'https://www.googleapis.com/youtube/v3/playlistItems';
-const PLAYLIST_ID = 'PLmmhgwbeGV3c3Eap2dLeX0KCvW-vEpa9B';
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+const YOUTUBE_PLAYLIST_ITEMS_API =
+  "https://www.googleapis.com/youtube/v3/playlistItems";
+const PLAYLIST_ID = "PLmmhgwbeGV3c3Eap2dLeX0KCvW-vEpa9B";
 
 export async function getServerSideProps() {
-  const res = await fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=50&playlistId=${PLAYLIST_ID}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`);
+  const res = await fetch(
+    `${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=50&playlistId=${PLAYLIST_ID}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`
+  );
   const data = await res.json();
   return {
     props: {
-      data
-    }
-  }
+      data,
+    },
+  };
 }
 
-export default function Home({data}) {
-    
+// comment to test GitHub connection
+
+export default function Home({ data }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -24,30 +28,28 @@ export default function Home({data}) {
 
       <main className={styles.main}>
         <div className={styles.siteTitle}>
-          <h1 className={styles.title}>
-            JustinLexiAcro.Yoga
-          </h1>
+          <h1 className={styles.title}>JustinLexiAcro.Yoga</h1>
         </div>
-        
+
         <ul className={styles.grid}>
           {data.items.map(({ id, snippet = {} }) => {
             const { title, thumbnails = {}, resourceId = {} } = snippet;
             const { medium } = thumbnails;
             return (
               <li key={id} className={styles.card}>
-                <a 
+                <a
                   href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
-                  target='_blank'
-                  rel='norefer'
+                  target="_blank"
+                  rel="norefer"
                 >
                   <p>
                     {/* <img width={medium.width} height={medium.height} src={medium.url} alt="" /> */}
                     <img src={medium.url} alt="" />
                   </p>
-                  <h3>{ title }</h3>
+                  <h3>{title}</h3>
                 </a>
               </li>
-            )
+            );
           })}
         </ul>
       </main>
@@ -58,10 +60,10 @@ export default function Home({data}) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
     </div>
-  )
+  );
 }
